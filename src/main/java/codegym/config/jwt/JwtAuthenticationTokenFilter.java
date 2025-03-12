@@ -29,6 +29,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 //        String jwt = lay ra token
+
         String jwt = getJwtFromRequest(request);
         if (jwt != null && jwtService.validateJwtToken(jwt) ) {
             String username = jwtService.getUsernameFromJwtToken(jwt);
@@ -41,6 +42,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
